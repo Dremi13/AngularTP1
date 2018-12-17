@@ -9,6 +9,8 @@ import { Message } from "../models/message"
 export class ChatFormulaireComponent implements OnInit {
 
   public texte: string;
+  public auteur: string;
+  public errorsForm: any;
     
   @Output() nouveauMessage: EventEmitter<Message>;
   constructor() {
@@ -17,14 +19,31 @@ export class ChatFormulaireComponent implements OnInit {
   
   ngOnInit() {
     this.texte = '';
+    this.auteur = '';
+    this.errorsForm = {};
+    this.errorsForm.required = new Array<String>();
   }
+
   public envoyer(): void {
+
+    this.errorsForm.required = new Array<String>();
+
+    if(this.texte == '')  this.errorsForm.required.push("Texte")
+    if(this.auteur == '') this.errorsForm.required.push("Auteur")
+
+    if(this.errorsForm.required.length > 0){
+      return
+    } 
+
     const message = new Message();
-    message.auteur = 'toto';
+    message.auteur = this.auteur;
     message.date = new Date();
     message.texte = this.texte;
 
     this.nouveauMessage.emit(message);
+
+    this.texte = '';
+    this.auteur = '';
   }
 
 }

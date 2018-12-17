@@ -26,6 +26,10 @@ export class ChatService {
       return messages;
   }
   
+  
+ /* 
+  Fonction pré-Bonus serveur node.
+ 
   public getMessages(): Observable<Array<Message>> {
     return new Observable<Array<Message>>((observer) => {
       this.http.get<Array<any>>('https://jsonplaceholder.typicode.com/posts')
@@ -38,12 +42,27 @@ export class ChatService {
           () => observer.complete()
         );
       });
-    }
+  }*/
+
+    public getMessages(): Observable<Array<Message>> {
+      return new Observable<Array<Message>>((observer) => {
+        this.http.get<Array<any>>('http://localhost:8100/messages')
+          .subscribe(
+            (messages) => {
+              this.messages = messages;
+              observer.next(this.messages);
+            },
+            (error) => observer.error(error),
+            () => observer.complete()
+          );
+        });
+      }
 
   public addMessage(message: Message): Array<Message> {
-    console.log(message);
     this.messages.push(message);
     return this.messages;
   }
+      
+
 
 }

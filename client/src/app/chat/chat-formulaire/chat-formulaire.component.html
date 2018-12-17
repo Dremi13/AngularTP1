@@ -1,0 +1,16 @@
+<label>Votre message:</label>
+<input type="text" name="message" [(ngModel)]="texte" >
+<label>Votre nom:</label>
+<input type="text" name="auteur" [(ngModel)]="auteur" >
+<button type="button" (click)="envoyer()">envoyer</button>
+
+<div *ngIf="this.errorsForm.required.length > 0"
+    class="alert alert-danger">
+
+    <ul>
+        <li *ngFor="let required of this.errorsForm.required">
+          {{ required }} requis.
+        </li>
+    </ul>
+  
+</div>
