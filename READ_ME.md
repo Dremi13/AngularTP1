@@ -1,6 +1,6 @@
 # Rendu de TP Angular de DEUTSCH Rémi
 
-Le dossier contient deux dossiers :
+Le rendu contient deux dossiers :
 * le dossier client,
 * le dossier serveur (contenant le bonus node.js).
 
